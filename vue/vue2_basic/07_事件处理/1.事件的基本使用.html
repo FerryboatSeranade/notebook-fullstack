@@ -21,6 +21,7 @@
 			<!-- <button v-on:click="showInfo">点我提示信息</button> -->
 			<button @click="showInfo1">点我提示信息1（不传参）</button>
 			<button @click="showInfo2($event,66)">点我提示信息2（传参）</button>
+			<button @click="handleArrow">点我触发箭头函数</button>
 		</div>
 	</body>
 
@@ -34,17 +35,27 @@
 			},
 			methods:{
 				showInfo1(event){
-					// console.log(event.target.innerText)
+					console.log("this.showInfo1", this.showInfo1)
+					console.log("event.target", event.target)
+					console.log("event.target.innerText", event.target.innerText)
 					// console.log(this) //此处的this是vm
-					alert('同学你好！')
+					// alert('同学你好！')
 				},
 				showInfo2(event,number){
-					console.log(event,number)
-					// console.log(event.target.innerText)
+					console.log("this.showInfo2", this.showInfo2)
+					console.log("接受参数", event,number)
+					console.log("event.target", event.target)
+					console.log("event.target.innerText", event.target.innerText)
 					// console.log(this) //此处的this是vm
-					alert('同学你好！！')
+					// alert('同学你好！！')
+				},
+				//箭头函数定义vue中的method
+				handleArrow:()=>{
+					console.log("this.handleArrow", this.handleArrow)
+					console.log("this", this) //此处的this是window
 				}
 			}
 		})
+		console.log("vm", vm)
 	</script>
 </html>
