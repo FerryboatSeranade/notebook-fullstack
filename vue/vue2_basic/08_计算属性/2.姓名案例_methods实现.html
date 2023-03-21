@@ -1,35 +1,47 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8" />
-		<title>姓名案例_methods实现</title>
-		<!-- 引入Vue -->
-		<script type="text/javascript" src="../js/vue.js"></script>
-	</head>
-	<body>
-		<!-- 准备好一个容器-->
-		<div id="root">
-			姓：<input type="text" v-model="firstName"> <br/><br/>
-			名：<input type="text" v-model="lastName"> <br/><br/>
-			全名：<span>{{fullName()}}</span>
-		</div>
-	</body>
+<head>
+    <meta charset="UTF-8"/>
+    <title>姓名案例_methods实现</title>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<!-- 准备好一个容器-->
+<div id="root">
+    姓：<input type="text" v-model="firstName"> <br/><br/>
+    名：<input type="text" v-model="lastName"> <br/><br/>
+    全名：<span>{{fullName()}}</span> <br/><br/>
+    全名：<span>{{fullName()}}</span> <br/><br/>
+    全名：<span>{{fullName()}}</span> <br/><br/>
+    全名：<span>{{fullName()}}</span> <br/><br/>
+</div>
+</body>
 
-	<script type="text/javascript">
-		Vue.config.productionTip = false //阻止 vue 在启动时生成生产提示。
-
-		new Vue({
-			el:'#root',
-			data:{
-				firstName:'张',
-				lastName:'三'
-			},
-			methods: {
-				fullName(){
-					console.log('@---fullName')
-					return this.firstName + '-' + this.lastName
-				}
-			},
-		})
-	</script>
+<script type="text/javascript">
+    Vue.config.productionTip = false //阻止 vue 在启动时生成生产提示。
+    let callCounts = 0
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            firstName: '张',
+            lastName: '三',
+            dependencyData: {
+                a: 1,
+                b: 2,
+            }
+        },
+        methods: {
+            fullName() {
+                //当在工作台中输入
+                // vm.dependencyData={a:1,b:2}时，会触发fullName()的执行。explain:此对象非彼对象
+                // vm.dependencyData.a+=1时，不会触发fullName()的执行。explain:地址不变
+                let data = this.dependencyData
+                console.log("enter function fullName() times:", ++callCounts)
+                return this.firstName + '-' + this.lastName
+            }
+        },
+    })
+    console.log("vm", vm)
+</script>
 </html>
