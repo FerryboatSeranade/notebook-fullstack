@@ -12,6 +12,7 @@
 
 			Object.defineProperty(obj2,'x',{
 				get(){
+					console.log("I'm obj2,我本身没有x")
 					return obj.x
 				},
 				set(value){
