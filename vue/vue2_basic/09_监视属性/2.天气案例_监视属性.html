@@ -24,7 +24,6 @@
 
 	<script type="text/javascript">
 		Vue.config.productionTip = false //阻止 vue 在启动时生成生产提示。
-		
 		const vm = new Vue({
 			el:'#root',
 			data:{
@@ -58,5 +57,14 @@
 				console.log('isHot被修改了',newValue,oldValue)
 			}
 		})
+		//监视的属性必须存在，才能进行监视(除非设置immediate=true可以一开始调用一次)!
+		//后面在工作台中，可以通过vm.isUndefinedInitially = 'xxx'来修改isUndefinedInitially的值,会发现下面的handler不会调用
+		vm.$watch('isUndefinedInitially',{
+			immediate:true, //初始化时让handler调用一下,只有这里调用一次，因为isUndefinedInitially不存在
+			handler(newValue,oldValue){
+				console.log('isUndefinedInitially被修改了',newValue,oldValue)
+			}
+		})
+		console.log("vm", vm)
 	</script>
 </html>
